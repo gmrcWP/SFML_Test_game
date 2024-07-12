@@ -11,7 +11,7 @@ void Skeleton::Initialize() {
 
 void Skeleton::Load() {
     if (texture.loadFromFile("Assets/Skeleton/Textures/spritesheet.png")) {
-        std::cout << "Skeleton texture loaded";
+        std::cout << "Skeleton texture loaded" << std::endl;
         sprite.setTexture(texture);
         sprite.setPosition(sf::Vector2f(1200, 600));
 
@@ -22,7 +22,7 @@ void Skeleton::Load() {
         boundingRectangle.setSize(sf::Vector2f(size.x, size.y));
     }
     else {
-        std::cout << "Skeleton texture failed to load";
+        std::cout << "Skeleton texture failed to load" << std::endl;
     }
 }
 
