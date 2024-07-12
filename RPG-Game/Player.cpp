@@ -2,6 +2,10 @@
 #include <iostream>
 #include "Math.h"
 
+Player::Player() : bulletSpeed(0.5f), playerSpeed(6.0f) {
+
+}
+
 void Player::Initialize() {
     boundingRectangle.setFillColor(sf::Color::Transparent);
     boundingRectangle.setOutlineColor(sf::Color::Red);
@@ -12,7 +16,7 @@ void Player::Initialize() {
 
 void Player::Load() {
     if (texture.loadFromFile("Assets/Player/Textures/spritesheet.png")) {
-        std::cout << "Player texture loaded";
+        std::cout << "Player texture loaded" << std::endl;
         sprite.setTexture(texture);
 
         int XIndex = 0;
@@ -22,7 +26,7 @@ void Player::Load() {
         boundingRectangle.setSize(sf::Vector2f(size.x, size.y));
     }
     else {
-        std::cout << "Player texture failed to load";
+        std::cout << "Player texture failed to load" << std::endl;
     }
 }
 

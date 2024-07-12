@@ -19,6 +19,8 @@ private:
 public:
 	sf::Sprite sprite;
 public:
+	Player();
+
 	void Initialize();
 	void Load();
 	void Update(float deltaTime, Skeleton& skeleton);
