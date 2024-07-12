@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-
+#include <iostream>
 #include "Player.h"
 #include "Skeleton.h"
 
@@ -9,6 +9,7 @@ int main()
     sf::ContextSettings settings;
     settings.antialiasingLevel = 8;
     sf::RenderWindow window(sf::VideoMode(1920, 1080), "SFML works!", sf::Style::Default, settings);
+    window.setFramerateLimit(240);
     
     //---------------------------------------------INITIALIZE---------------------------------------------------   
     Player player;
@@ -23,9 +24,13 @@ int main()
     skeleton.Load(); 
     //---------------------------------------------LOAD----------------------------------------------------
     
+    sf::Clock clock;
+
     //main game loop
     while (window.isOpen())
     {
+        sf::Time deltatimeTimer = clock.restart();
+        float deltaTime = deltatimeTimer.asMilliseconds();
         //---------------------------------------------UPDATE----------------------------------------------------
         sf::Event event;
         while (window.pollEvent(event))
@@ -34,8 +39,8 @@ int main()
                 window.close();
         }
 
-        skeleton.Update();
-        player.Update(skeleton);
+        skeleton.Update(deltaTime);
+        player.Update(deltaTime, skeleton);
         //---------------------------------------------DRAW----------------------------------------------------
         window.clear(sf::Color::Black);
 
