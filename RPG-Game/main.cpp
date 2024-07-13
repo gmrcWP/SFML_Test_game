@@ -1,6 +1,8 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
+
 #include "Player.h"
+#include "Map.h"
 #include "Skeleton.h"
 #include "FrameRate.h"
 
@@ -14,15 +16,18 @@ int main()
     
     //---------------------------------------------INITIALIZE---------------------------------------------------
     FrameRate frameRate;
+    Map map;
     Player player;
     Skeleton skeleton;
     //---------------------------------------------INITIALIZE----------------------------------------------------
+    map.Initialize();
     frameRate.Initialize();
     player.Initialize();
     skeleton.Initialize();
     //---------------------------------------------INITIALIZE----------------------------------------------------
 
      //---------------------------------------------LOAD----------------------------------------------------
+    map.Load();
     frameRate.Load();
     player.Load();    
     skeleton.Load(); 
@@ -46,10 +51,12 @@ int main()
 
         sf::Vector2f mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
 
+        map.Update(deltaTime);
         skeleton.Update(deltaTime);
         player.Update(deltaTime, skeleton, mousePosition);
         //---------------------------------------------DRAW----------------------------------------------------
         window.clear(sf::Color::Black);
+        map.Draw(window);
         skeleton.Draw(window);
         player.Draw(window);
         frameRate.Draw(window);
