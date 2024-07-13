@@ -6,12 +6,20 @@ class Skeleton
 private:
 	sf::Texture texture;
 
-	sf::RectangleShape boundingRectangle;
-
-	sf::Vector2i size;
+	sf::Text healthText;
+	sf::Font font;
 public:
 	sf::Sprite sprite;
+
+	sf::RectangleShape boundingRectangle;
+	sf::Vector2i size;
+
+	int health;
 public:
+	Skeleton();
+
+	void ChangeHealth(int hp);
+
 	void Initialize();
 	void Load();
 	void Update(float deltaTime);
