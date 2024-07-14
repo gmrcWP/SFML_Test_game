@@ -30,17 +30,17 @@ void Player::Load() {
     }
 }
 
-void Player::Update(float deltaTime,Skeleton& skeleton, sf::Vector2f& mousePosition) {
+void Player::Update(double deltaTime,Skeleton& skeleton, sf::Vector2f& mousePosition) {
     sf::Vector2f position = sprite.getPosition();
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-        sprite.move(sf::Vector2f(0.1, 0) * playerSpeed * deltaTime);
+        sprite.move(sf::Vector2f(0.1, 0) * playerSpeed * (float)deltaTime);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-        sprite.move(sf::Vector2f(-0.1, 0) * playerSpeed * deltaTime);
+        sprite.move(sf::Vector2f(-0.1, 0) * playerSpeed * (float)deltaTime);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::S))
-        sprite.move(sf::Vector2f(0, 0.1) * playerSpeed * deltaTime);
+        sprite.move(sf::Vector2f(0, 0.1) * playerSpeed * (float)deltaTime);
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
-        sprite.move(sf::Vector2f(0, -0.1) * playerSpeed * deltaTime);
+        sprite.move(sf::Vector2f(0, -0.1) * playerSpeed * (float)deltaTime);
 
     fireRateTimer += deltaTime;
 
@@ -67,8 +67,6 @@ void Player::Update(float deltaTime,Skeleton& skeleton, sf::Vector2f& mousePosit
     }
 
     boundingRectangle.setPosition(sprite.getPosition());
-
-    
 }
 
 void Player::Draw(sf::RenderWindow& window) {

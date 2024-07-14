@@ -19,7 +19,7 @@ void FrameRate::Load() {
     }
 }
 
-void FrameRate::Update(float deltaTime) {
+void FrameRate::Update(double deltaTime) {
     timer += deltaTime;
     if (timer >= 100.0) {
         float result = 1000.0 / deltaTime;
