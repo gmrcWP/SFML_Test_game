@@ -2,7 +2,8 @@
 #include <fstream>
 #include <string>
 
-void MapLoader::Load(std::string filename) {
+void MapLoader::Load(std::string filename, MapData& mapData) {
+
 	std::string line;
 	std::ifstream file(filename);
 
@@ -22,13 +23,62 @@ void MapLoader::Load(std::string filename) {
 			}
 
 			if (isMapValid) {
-				int count = line.find('=');
-				std::string variable = line.substr(0, count);
-				std::string value = line.substr(count + 1, line.length() - count);
+				try
+				{
+					int count = line.find('=');
+					std::string variable = line.substr(0, count);
+					std::string value = line.substr(count + 1, line.length() - count);
 
+					if (variable == "version") {
+						mapData.version = std::stoi(value);
+					}
+					else if (variable == "tilesheet") {
+						mapData.tilesheet = value;
+					}
+					else if (variable == "name") {
+						mapData.name = value;
+					}
+					else if (variable == "map-width") {
+						mapData.mapWidth = std::stoi(value);
+					}
+					else if (variable == "map-height") {
+						mapData.mapHeight = std::stoi(value);
+					}
+					else if (variable == "tile-width") {
+						mapData.tileWidth = std::stoi(value);
+					}
+					else if (variable == "tile-height") {
+						mapData.tileHeight = std::stoi(value);
+					}
+					else if (variable == "scale-x") {
+						mapData.scaleX = std::stoi(value);
+					}
+					else if (variable == "dataSize") {
+						mapData.dataLength = std::stoi(value);
+					}
+					else if (variable == "data") {
+						mapData.data = new int[mapData.dataLength];
+						int offset = 0;
+						int i = 0;
+						while (true)
+						{
+							int count = value.find(',', offset);
+							std::string mapIndex = value.substr(offset, count - offset);
+							
+							if (mapIndex == ";")
+								break;
 
-				std::cout << line << std::endl;
-				break;
+							mapData.data[i] = std::stoi(mapIndex);
+
+							offset = count + 1;
+							i++;
+						}
+					}
+				}
+				catch (const std::exception&)
+				{
+					std::cout << "Something went wrong while reading file" << std::endl;
+				}
 			}
 		}
 		file.close();
@@ -36,4 +86,5 @@ void MapLoader::Load(std::string filename) {
 	else {
 		std::cout << "Unable to open file " << filename << std::endl;
 	}
+
 }

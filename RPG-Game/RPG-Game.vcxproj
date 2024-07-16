@@ -159,6 +159,7 @@
     <ClCompile Include="src\Skeleton.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Src\MapData.h" />
     <ClInclude Include="src\MapLoader.h" />
     <ClInclude Include="src\Bullet.h" />
     <ClInclude Include="src\FrameRate.h" />
